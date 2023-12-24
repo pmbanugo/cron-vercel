@@ -5,7 +5,7 @@ import { kv } from '@vercel/kv'
 //   runtime: 'edge',
 // }
 
-export default async function handler(req: NextRequest, response: NextApiResponse) {
+export default async function handler(req: NextRequest, response: NextResponse) {
   const cron = req.nextUrl.pathname.split('/')[3]
   console.log(cron)
   // return new Response('Hello', { status: 200 });
