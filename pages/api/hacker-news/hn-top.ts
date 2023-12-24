@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { kv } from '@vercel/kv'
 
-export const config = {
-  runtime: 'edge',
-}
+// export const config = {
+//   runtime: 'edge',
+// }
 
 export default async function handler(req: NextRequest, response: NextApiResponse) {
   const cron = req.nextUrl.pathname.split('/')[3]
@@ -28,6 +28,9 @@ export default async function handler(req: NextRequest, response: NextApiRespons
 
     // Resolve all story detail promises
     const topStories = await Promise.all(storyDetailsPromises);
+
+    console.log({topStories});
+    
 
     // Respond with a JSON object containing the top stories
     // res.status(200).json(topStories);
