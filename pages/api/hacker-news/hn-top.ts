@@ -5,7 +5,7 @@ export const config = {
   runtime: 'edge',
 }
 
-export default async function handler(req: NextRequest) {
+export default async function handler(req: NextRequest, response: NextApiResponse) {
   const cron = req.nextUrl.pathname.split('/')[3]
   console.log(cron)
   // return new Response('Hello', { status: 200 });
@@ -30,14 +30,12 @@ export default async function handler(req: NextRequest) {
     const topStories = await Promise.all(storyDetailsPromises);
 
     // Respond with a JSON object containing the top stories
-    res.status(200).json(topStories);
-
-    return NextResponse.json(topStories, { status: 200 })
+    // res.status(200).json(topStories);
+    response.status(200).json(topStories)
   
   } catch (error) {
     // Handle any errors that occurred during the process
-    // res.status(500).json({ error: 'Failed fetching top Hacker News stories' });
-    return NextResponse.json({ error: 'Failed fetching top Hacker News stories' }, { status: 500 })
+    response.status(500).json({ error: 'Failed fetching top Hacker News stories' });
   }
 }
 
